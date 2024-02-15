@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+/*.protest-riot-regular {
+  font-family: "Protest Riot", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}*/
+
+.table {
+    width: 100vw;
+    height: 100vh;
+    background-color: #070F2B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book {
+    width: 60vw;
+    height: 80vh;
+    background-color: #3E3232;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.page {
+    width: 25vw;
+    height: 70vh;
+    background-color: #EFE1D1;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.seam {
+    height: 70vh;
+    width: 10px;
+    background-color: black;
+}
+
+.journal-title {
+    font-family: "Protest Riot", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3rem;
+}
+
+.entry-title {
+    font-family: "Protest Riot", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3rem;
+}
+
