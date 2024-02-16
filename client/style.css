@@ -1,12 +1,27 @@
 * {
     margin: 0;
     padding: 0;
+
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
 }
-/*.protest-riot-regular {
+
+/*
+.protest-riot-regular {
   font-family: "Protest Riot", sans-serif;
   font-weight: 400;
   font-style: normal;
-}*/
+}
+
+.dancing-script-<uniquifier> {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+*/
 
 .table {
     width: 100vw;
@@ -59,7 +74,10 @@
 }
 
 .entry-chat {
+    overflow-y: scroll;
+    overflow-x: hidden;
     width: 20vw;
+    font-size: 1.5rem;
     height: 50vh;
     border-radius: 15px;
     border: 2px solid black;
@@ -67,12 +85,56 @@
     padding: 5px;
 }
 
-.entry-input {
+/* Hide the scrollbar track */
+.entry-chat::-webkit-scrollbar-track {
+    display: none;
+}
+
+/* Style the scrollbar thumb */
+.entry-chat::-webkit-scrollbar-thumb {
+    background-color: #888; /* Change the color of the thumb */
+    border-radius: 10px; /* Round the corners of the thumb */
+}
+
+/* Show only the vertical scrollbar */
+.entry-chat {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Optionally, you can style the scrollbar track as well */
+.entry-chat::-webkit-scrollbar {
+    width: 8px; /* Set the width of the scrollbar */
+    background-color: #fff; /* Change the color of the track */
+    border-radius: 15px; /* Round the corners of the track */
+}
+
+.input-container {
     margin-top: 2vh;
     width: 20vw;
-    height: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.entry-input {
+    width: 16vw;
+    height: 40px;
     border-radius: 15px;
     border: 2px solid black;
     background-color: #EEF0E5;
-    padding: 5px;
+    padding-left: 10px;
+    font-size: 1.2rem;
+}
+
+.submit-button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.feather-img {
+    width: 100%;
+    height: 100%;
 }

@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
     <title>Diary Chatbot</title>
 </head>
 <body>
@@ -20,10 +21,13 @@
         <span class="seam"></span>
         <article class="page">
             <h1 class="entry-title">Entry</h1>
-            <p class="entry-chat"></p>
+            <p class="entry-chat">
+            </p>
             <form>
-                <input type="text" name="query" class="entry-input" placeholder="Make a journal entry...">
-                <button type="submit">Send</button>
+                <div class="input-container">
+                    <input type="text" name="query" class="entry-input" placeholder="Make a journal entry...">
+                    <button class="submit-button" type="submit"><img class="feather-img" src="images/feather-send.png"></button>
+                </div>
             </form>
         </article>
     </section>
