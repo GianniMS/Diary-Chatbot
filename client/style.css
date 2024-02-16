@@ -58,3 +58,21 @@
     font-size: 3rem;
 }
 
+.entry-chat {
+    width: 20vw;
+    height: 50vh;
+    border-radius: 15px;
+    border: 2px solid black;
+    background-color: #EEF0E5;
+    padding: 5px;
+}
+
+.entry-input {
+    margin-top: 2vh;
+    width: 20vw;
+    height: 25px;
+    border-radius: 15px;
+    border: 2px solid black;
+    background-color: #EEF0E5;
+    padding: 5px;
+}

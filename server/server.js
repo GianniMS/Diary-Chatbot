@@ -17,6 +17,11 @@ const model = new ChatOpenAI({
 // Middleware to parse incoming request bodies
 app.use(express.json());
 
+//You can use this to check if your server is working
+app.get('/', (req, res)=>{
+    res.send("Welcome to your server")
+})
+
 // Endpoint to handle POST requests to '/chat'
 app.post('/chat', async (req, res) => {
     try {
