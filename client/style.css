@@ -79,7 +79,6 @@
     width: 20vw;
     font-size: 1.5rem;
     height: 50vh;
-    border-radius: 15px;
     border: 2px solid black;
     background-color: #EEF0E5;
     padding: 5px;
@@ -92,20 +91,13 @@
 
 /* Style the scrollbar thumb */
 .entry-chat::-webkit-scrollbar-thumb {
-    background-color: #888; /* Change the color of the thumb */
-    border-radius: 10px; /* Round the corners of the thumb */
-}
-
-/* Show only the vertical scrollbar */
-.entry-chat {
-    overflow-y: auto;
-    overflow-x: hidden;
+    background-color: black; /* Change the color of the thumb */
 }
 
 /* Optionally, you can style the scrollbar track as well */
 .entry-chat::-webkit-scrollbar {
     width: 8px; /* Set the width of the scrollbar */
-    background-color: #fff; /* Change the color of the track */
+    background-color: #EEF0E5; /* Change the color of the track */
     border-radius: 15px; /* Round the corners of the track */
 }
 
@@ -114,12 +106,13 @@
     width: 20vw;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .entry-input {
+    margin-left: -0.3vw;
     width: 16vw;
     height: 40px;
-    border-radius: 15px;
     border: 2px solid black;
     background-color: #EEF0E5;
     padding-left: 10px;
@@ -137,4 +130,9 @@
 .feather-img {
     width: 100%;
     height: 100%;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
 }
