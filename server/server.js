@@ -1,11 +1,18 @@
 import express from "express";
 import { ChatOpenAI } from "@langchain/openai";
+import cors from "cors";
+import bodyParser from "body-parser";
 
 // node --env-file=.env server.js
 // nodemon --env-file=.env server.js
 
 const app = express();
 const port = 3000;
+
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: true}));
+app.use(cors());
 
 const model = new ChatOpenAI({
     azureOpenAIApiKey: process.env.AZURE_OPENAI_API_KEY,
@@ -25,6 +32,7 @@ app.get('/', (req, res)=>{
 // Endpoint to handle POST requests to '/chat'
 app.post('/chat', async (req, res) => {
     try {
+        // console.log(req.body.query);
         // Get the user query from the request body
         const userQuery = req.body.query;
 
@@ -54,7 +62,3 @@ app.get('/joke', async (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
-
-//npm install cors
-//import cors from "cors"
-//app.use(cors())
