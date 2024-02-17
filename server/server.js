@@ -26,7 +26,7 @@ app.use(express.json());
 
 //You can use this to check if your server is working
 app.get('/', (req, res)=>{
-    res.send("Welcome to your server")
+    res.send("Diary chatbot in progress <3")
 })
 
 // Endpoint to handle POST requests to '/chat'
@@ -35,9 +35,9 @@ app.post('/chat', async (req, res) => {
         // console.log(req.body.query);
         // Get the user query from the request body
         const userQuery = req.body.query;
-
+        let engineeredPrompt = `You are a summary specialist. Summarize the following journal entry from the I-person: ${userQuery} as short as you can.`
         // Invoke the model with the user query
-        const response = await model.invoke(userQuery);
+        const response = await model.invoke(engineeredPrompt);
 
         // Send the model's response back to the client
         res.json({ response: response.content });
