@@ -35,9 +35,11 @@ app.post('/chat', async (req, res) => {
         // console.log(req.body.query);
         // Get the user query from the request body
         const userQuery = req.body.query;
-        let engineeredPrompt = `You are a summary specialist. Summarize the following journal entry from the I-person: ${userQuery} as short as you can.`
+        let engineeredPrompt = `Summarize the following journal entry from the I-person: ${userQuery} as short as you can.`
         // Invoke the model with the user query
-        const response = await model.invoke(engineeredPrompt);
+        const response = await model.invoke(engineeredPrompt, {
+            max_tokens: 30,
+        });
 
         // Send the model's response back to the client
         res.json({ response: response.content });
