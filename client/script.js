@@ -1,3 +1,5 @@
+let entryHistory = [];
+
 // Function to handle form submission
 async function handleSubmit(event) {
     event.preventDefault(); // Prevent the default form submission
@@ -20,7 +22,7 @@ async function handleSubmit(event) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ query: userInput }) // Send the user input as JSON
+            body: JSON.stringify({query: userInput}) // Send the user input as JSON
         });
 
         // Parse the JSON response
@@ -28,6 +30,15 @@ async function handleSubmit(event) {
 
         // Update the journal content with the response from the server
         document.querySelector('.entry-chat').textContent = responseData.response;
+
+        // Update the history content with the response from the server
+        entryHistory.push(responseData.response);
+        // Limit the history length to 31
+        if (entryHistory.length > 31) {
+            entryHistory.shift(); // Remove the oldest entry if the history exceeds the limit
+        }
+        console.log(entryHistory);
+
     } catch (error) {
         console.error("Error fetching response:", error);
         // Handle error if request fails
