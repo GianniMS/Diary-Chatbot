@@ -1,5 +1,25 @@
 let entryHistory = [];
 
+function historyDisplay() {
+    // Select the <ul> element inside the journal-content article
+    const ulElement = document.querySelector('.journal-content ul');
+
+    // Clear existing content in the <ul> element
+    ulElement.innerHTML = '';
+
+    // Loop through entryHistory and create a <li> element for each entry
+    entryHistory.forEach((entry, index) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = entry;
+        ulElement.appendChild(listItem);
+
+        // Add a <br> element after each <li> except the last one
+        if (index < entryHistory.length - 1) {
+            ulElement.appendChild(document.createElement('br'));
+        }
+    });
+}
+
 // Function to handle form submission
 async function handleSubmit(event) {
     event.preventDefault(); // Prevent the default form submission
@@ -37,7 +57,7 @@ async function handleSubmit(event) {
         if (entryHistory.length > 31) {
             entryHistory.shift(); // Remove the oldest entry if the history exceeds the limit
         }
-        console.log(entryHistory);
+        historyDisplay(); // Call historyDisplay to update the displayed history
 
     } catch (error) {
         console.error("Error fetching response:", error);

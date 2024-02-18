@@ -60,18 +60,6 @@ app.post('/chat', async (req, res) => {
     }
 });
 
-// Endpoint to handle GET requests to '/joke'
-let jokePrompt = "Tell me a joke about a car";
-app.get('/joke', async (req, res) => {
-    try {
-        const joke = await model.invoke(jokePrompt);
-        res.json({ joke: joke.content });
-    } catch (error) {
-        console.error("Error fetching joke:", error);
-        res.status(500).json({ error: "Error fetching joke:" });
-    }
-});
-
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
