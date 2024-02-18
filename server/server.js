@@ -2,8 +2,8 @@ import express from "express";
 import { ChatOpenAI } from "@langchain/openai";
 import cors from "cors";
 import bodyParser from "body-parser";
+// import { PromptTemplate } from "@langchain/openai";
 
-// node --env-file=.env server.js
 // nodemon --env-file=.env server.js
 
 const app = express();
@@ -21,6 +21,16 @@ const model = new ChatOpenAI({
     azureOpenAIApiDeploymentName: process.env.ENGINE_NAME,
 });
 
+const today = new Date();
+const yyyy = today.getFullYear();
+let mm = today.getMonth() + 1; // Months start at 0!
+let dd = today.getDate();
+
+if (dd < 10) dd = '0' + dd;
+if (mm < 10) mm = '0' + mm;
+
+const formattedToday = dd + '/' + mm + '/' + yyyy;
+
 // Middleware to parse incoming request bodies
 app.use(express.json());
 
@@ -35,10 +45,11 @@ app.post('/chat', async (req, res) => {
         // console.log(req.body.query);
         // Get the user query from the request body
         const userQuery = req.body.query;
-        let engineeredPrompt = `Summarize the following journal entry from the I-person: ${userQuery} as short as you can.`
+        let engineeredPrompt = `Summarize the following journal entry as short as you can in the I-person: ${userQuery}. Start of by stating: "${formattedToday}:"`
+        // ${userQuery} ${formattedToday}
         // Invoke the model with the user query
         const response = await model.invoke(engineeredPrompt, {
-            max_tokens: 30,
+            max_tokens: 15,
         });
 
         // Send the model's response back to the client
