@@ -36,7 +36,7 @@ app.use(express.json());
 
 //You can use this to check if your server is working
 app.get('/', (req, res)=>{
-    res.send("Diary chatbot in progress <3")
+    res.send("Journal App using OpenAI API to summarize the journal entry")
 })
 
 // Endpoint to handle POST requests to '/chat'

@@ -1,5 +1,22 @@
 // Load the history from localStorage when the page loads
 let entryHistory = JSON.parse(localStorage.getItem('entryHistory')) || [];
+// declare Journal-UI buttons
+const undoButton = document.querySelector(`.undo-button`);
+const deleteButton = document.querySelector(`.delete-button`);
+
+undoButton.addEventListener("click", function (event) {
+    // Undo last entry
+    entryHistory.pop();
+    // Update the displayed history
+    historyDisplay();
+})
+
+deleteButton.addEventListener("click", function (event) {
+    // Clear all entries
+    entryHistory = [];
+    // Update the displayed history
+    historyDisplay();
+});
 
 function historyDisplay() {
     const ulElement = document.querySelector('.journal-content ul');
@@ -35,18 +52,15 @@ async function handleSubmit(event) {
         });
         const responseData = await response.json();
 
-        // Add the response directly to the entryHistory array
         entryHistory.push(responseData.response);
 
         // Limit the history length to 31
         if (entryHistory.length > 31) {
-            entryHistory.shift(); // Remove the oldest entry if the history exceeds the limit
+            entryHistory.shift();
         }
 
-        // Save the updated history to localStorage
         localStorage.setItem('entryHistory', JSON.stringify(entryHistory));
 
-        // Update the displayed history
         historyDisplay();
     } catch (error) {
         console.error("Error fetching response:", error);
@@ -60,5 +74,5 @@ async function handleSubmit(event) {
 
 document.querySelector('form').addEventListener('submit', handleSubmit);
 
-// Call historyDisplay to initially display the history when the page loads
+// Call historyDisplay to display the history when the page loads
 historyDisplay();
