@@ -2,8 +2,6 @@ import express from "express";
 import { ChatOpenAI } from "@langchain/openai";
 import cors from "cors";
 import bodyParser from "body-parser";
-// import { PromptTemplate } from "@langchain/openai";
-
 // nodemon --env-file=.env server.js
 
 const app = express();

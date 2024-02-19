@@ -74,6 +74,7 @@
     padding-top: 5px;
     resize: none;
     font-size: 1.2vw;
+    font-family: "Outfit", sans-serif;
 }
 
 .entry-input::-webkit-scrollbar-track {
@@ -125,6 +126,7 @@
     padding-top: 5px;
     resize: none;
     font-size: 1.2vw;
+    font-family: "Outfit", sans-serif;
 }
 
 .journal-content::-webkit-scrollbar-track {
