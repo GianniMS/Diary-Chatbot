@@ -1,11 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-
-    font-family: "Dancing Script", cursive;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: normal;
 }
 
 /*
@@ -26,138 +21,74 @@
 .table {
     width: 100vw;
     height: 100vh;
-    background-color: #070F2B;
+    background: linear-gradient(135deg, #FCFCFD, #E8ECEF);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.book {
-    width: 60vw;
-    height: 80vh;
-    background-color: #3E3232;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+.title {
+    font-size: 3vw;
+    font-family: 'Archivo Black', sans-serif;
+    color: black;
+    position: absolute;
+    top: 35px;
+    left: 50px;
 }
 
-.page {
-    width: 25vw;
-    height: 70vh;
-    background-color: #EFE1D1;
-    border-radius: 15px;
+.title-2 {
+    color: #A48374;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+.container {
+    display: flex;
+    width: 60vw;
+    justify-content: space-around;
+}
+
+.card-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+    justify-content: space-around;
 
-.seam {
-    height: 70vh;
-    width: 10px;
-    background-color: black;
-}
-
-.journal-title {
-    font-family: "Protest Riot", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 3rem;
-}
-
-.journal-title-2 {
-    font-family: "Protest Riot", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 1.3rem;
-}
-
-.journal-content {
-    overflow-y: scroll;
-    overflow-x: hidden;
     width: 20vw;
-    height: 59vh;
-    font-size: 1.2rem;
-}
+    height: 60vh;
 
-.history-list {
-    display: flex;
-    flex-direction: column-reverse;
-}
-
-/* Hide the scrollbar track */
-.journal-content::-webkit-scrollbar-track {
-    display: none;
-}
-
-/* Style the scrollbar thumb */
-.journal-content::-webkit-scrollbar-thumb {
-    background-color: black; /* Change the color of the thumb */
-}
-
-/* Optionally, you can style the scrollbar track as well */
-.journal-content::-webkit-scrollbar {
-    width: 8px; /* Set the width of the scrollbar */
-    background-color: #EFE1D1; /* Change the color of the track */
-    border-radius: 15px; /* Round the corners of the track */
-}
-
-.entry-title {
-    font-family: "Protest Riot", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 3rem;
-}
-
-.entry-chat {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    width: 20vw;
-    font-size: 1.2rem;
-    height: 20vh;
-    border: 2px solid black;
-    background-color: #EEF0E5;
-    padding: 5px;
-}
-
-/* Hide the scrollbar track */
-.entry-chat::-webkit-scrollbar-track {
-    display: none;
-}
-
-/* Style the scrollbar thumb */
-.entry-chat::-webkit-scrollbar-thumb {
-    background-color: black; /* Change the color of the thumb */
-}
-
-/* Optionally, you can style the scrollbar track as well */
-.entry-chat::-webkit-scrollbar {
-    width: 8px; /* Set the width of the scrollbar */
-    background-color: #EEF0E5; /* Change the color of the track */
-    border-radius: 15px; /* Round the corners of the track */
+    background-color: #7077A1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
 }
 
 .input-container {
-    margin-bottom: 2vh;
-    width: 20vw;
+    height: 50vh;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    justify-content: space-around;
+}
+
+.section-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 2vw;
+}
+
+.sub-title {
+    font-size: 1.3vw;
 }
 
 .entry-input {
     overflow-y: scroll;
     overflow-x: hidden;
-    margin-left: -0.3vw;
-    width: 16vw;
-    height: 20vh;
-    border: 2px solid black;
-    background-color: #EEF0E5;
+    width: 18vw;
+    height: 40vh;
+    border-radius: 15px;
+    background-color: #424769;
     padding-left: 10px;
-    font-size: 1.2rem;
+    padding-top: 5px;
     resize: none;
-    margin-bottom: 5vh;
+    font-size: 1.2vw;
 }
 
 /* Hide the scrollbar track */
@@ -168,12 +99,13 @@
 /* Style the scrollbar thumb */
 .entry-input::-webkit-scrollbar-thumb {
     background-color: black; /* Change the color of the thumb */
+    border-radius: 15px;
 }
 
 /* Optionally, you can style the scrollbar track as well */
 .entry-input::-webkit-scrollbar {
     width: 8px; /* Set the width of the scrollbar */
-    background-color: #EEF0E5; /* Change the color of the track */
+    background-color: #E8ECEF; /* Change the color of the track */
     border-radius: 15px; /* Round the corners of the track */
 }
 
@@ -183,14 +115,70 @@
     border: none;
     background: none;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
 }
 
-.feather-img {
+.send-image {
     width: 100%;
     height: 100%;
+    background-color: #424769;
+    border-radius: 50px;
+    padding: 3px;
 }
 
 .loading-spinner {
     width: 40px;
     height: 40px;
+}
+
+.journal-content {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 18vw;
+    height: 40vh;
+    border-radius: 15px;
+    background-color: #424769;
+    padding-left: 10px;
+    padding-top: 5px;
+    resize: none;
+    font-size: 1.2vw;
+}
+
+/* Hide the scrollbar track */
+.journal-content::-webkit-scrollbar-track {
+    display: none;
+}
+
+/* Style the scrollbar thumb */
+.journal-content::-webkit-scrollbar-thumb {
+    background-color: black; /* Change the color of the thumb */
+    border-radius: 15px;
+}
+
+/* Optionally, you can style the scrollbar track as well */
+.journal-content::-webkit-scrollbar {
+    width: 8px; /* Set the width of the scrollbar */
+    background-color: #E8ECEF; /* Change the color of the track */
+    border-radius: 15px; /* Round the corners of the track */
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.history-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 10vw;
+}
+
+.history-button {
+    width: 40px;
+    height: 40px;
+    background-color: #424769;
+    border-radius: 50px;
+    padding: 3px;
 }

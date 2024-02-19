@@ -35,16 +35,18 @@ async function handleSubmit(event) {
         });
         const responseData = await response.json();
 
-        document.querySelector('.entry-chat').textContent = responseData.response;
-
+        // Add the response directly to the entryHistory array
         entryHistory.push(responseData.response);
+
+        // Limit the history length to 31
         if (entryHistory.length > 31) {
-            entryHistory.shift();
+            entryHistory.shift(); // Remove the oldest entry if the history exceeds the limit
         }
 
         // Save the updated history to localStorage
         localStorage.setItem('entryHistory', JSON.stringify(entryHistory));
 
+        // Update the displayed history
         historyDisplay();
     } catch (error) {
         console.error("Error fetching response:", error);
