@@ -39,7 +39,7 @@
     justify-content: space-around;
 
     width: 20vw;
-    height: 60vh;
+    height: 65vh;
 
     background-color: #7077A1;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -60,7 +60,9 @@
 }
 
 .sub-title {
-    font-size: 1.3vw;
+    height: 30px;
+    font-size: 1.5vw;
+    font-family: 'Archivo Black', sans-serif;
 }
 
 .entry-input {
@@ -128,7 +130,15 @@
     background: none;
     cursor: pointer;
     display: flex;
-    justify-content: center;
+}
+
+.location-image {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background-color: #424769;
+    border-radius: 50px;
+    padding: 3px;
 }
 
 .send-image {

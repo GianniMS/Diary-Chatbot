@@ -51,12 +51,14 @@ app.post('/location', async (req, res) => {
         // Get the location from the request body
         locationName = req.body.location;
 
+        // Initiate OpenWeatherAPI
         let weather = new OpenWeatherAPI({
             key: process.env.OPENWEATHER_API_KEY,
             locationName: locationName,
             units: "imperial"
         });
 
+        // Set currentWeather variable to string displaying location and weather description
         weather.getCurrent().then(data => {
             currentWeather = `Current weather in ${locationName} is: ${data.weather.description}`;
             console.log(currentWeather);
