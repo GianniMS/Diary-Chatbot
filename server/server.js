@@ -3,6 +3,7 @@ import {ChatOpenAI} from "@langchain/openai";
 import {OpenWeatherAPI} from "openweather-api-node";
 import cors from "cors";
 import bodyParser from "body-parser";
+
 // nodemon --env-file=.env server.js
 
 const app = express();
@@ -22,18 +23,8 @@ const model = new ChatOpenAI({
 });
 
 // State the current weather conditions and store it in currentWeather to pass it to the prompt
-let locationName = "Rotterdam";
-let weather = new OpenWeatherAPI({
-    key: process.env.OPENWEATHER_API_KEY,
-    locationName: locationName,
-    units: "imperial"
-});
-
-let currentWeather;
-weather.getCurrent().then(data => {
-    currentWeather = `Current weather in ${locationName} is: ${data.weather.description}`;
-    console.log(currentWeather);
-});
+let locationName = '';
+let currentWeather = '';
 
 // State the current date to pass it to the prompt
 const today = new Date();
@@ -51,8 +42,29 @@ app.use(express.json());
 
 // Check if the server is live
 app.get('/', (req, res) => {
-    res.send("Journal App using OpenAI API to summarize the journal entry")
+    res.send("Journal App using OpenAI API and OpenWeather API to summarize the journal entry")
 })
+
+app.post('/location', async (req, res) => {
+    try {
+        // Get the location from the request body
+        locationName = req.body.location;
+
+        let weather = new OpenWeatherAPI({
+            key: process.env.OPENWEATHER_API_KEY,
+            locationName: locationName,
+            units: "imperial"
+        });
+
+        weather.getCurrent().then(data => {
+            currentWeather = `Current weather in ${locationName} is: ${data.weather.description}`;
+            console.log(currentWeather);
+        });
+
+    } catch (error) {
+        console.error("Error getting location:", error);
+    }
+});
 
 // Endpoint to handle POST requests to '/chat'
 // AI Usecase excluding prompt engineering

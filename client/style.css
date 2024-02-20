@@ -102,6 +102,35 @@
     justify-content: center;
 }
 
+.location-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 18vw;
+}
+
+.location-input {
+    width: 14vw;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #424769;
+    padding-left: 10px;
+    padding-top: 5px;
+    resize: none;
+    font-size: 1.2vw;
+    font-family: "Outfit", sans-serif;
+}
+
+.location-button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
 .send-image {
     width: 100%;
     height: 100%;

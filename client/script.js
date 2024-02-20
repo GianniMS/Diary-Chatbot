@@ -34,6 +34,24 @@ function historyDisplay() {
     });
 }
 
+async function handleSubmitLocation(event) {
+    event.preventDefault();
+
+    try {
+        const locationInput = document.querySelector('.location-input').value;
+        const response = await fetch('http://localhost:3000/location', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({location: locationInput})
+        });
+
+    } catch (error) {
+        console.error("Error getting location:", error);
+    }
+}
+
 async function handleSubmit(event) {
     event.preventDefault();
 
@@ -74,7 +92,8 @@ async function handleSubmit(event) {
     document.querySelector('.entry-input').value = '';
 }
 
-document.querySelector('form').addEventListener('submit', handleSubmit);
+document.querySelector('.location-form').addEventListener('submit', handleSubmitLocation);
+document.querySelector('.entry-form').addEventListener('submit', handleSubmit);
 
 // Call historyDisplay to display the history when the page loads
 historyDisplay();
