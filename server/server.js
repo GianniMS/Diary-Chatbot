@@ -39,6 +39,7 @@ app.get('/', (req, res)=>{
 })
 
 // Endpoint to handle POST requests to '/chat'
+// AI Usecase excluding prompt engineering
 app.post('/chat', async (req, res) => {
     try {
         // Get the journal entry from the request body

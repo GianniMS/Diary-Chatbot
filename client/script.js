@@ -27,6 +27,7 @@ function historyDisplay() {
         listItem.textContent = entry;
         ulElement.appendChild(listItem);
 
+        // AI Usecase
         if (index < entryHistory.length - 1) {
             ulElement.appendChild(document.createElement('br'));
         }
@@ -69,6 +70,7 @@ async function handleSubmit(event) {
         loadingSpinner.style.display = 'none';
     }
 
+    // AI Usecase
     document.querySelector('.entry-input').value = '';
 }
 
