@@ -96,6 +96,6 @@ app.post('/chat', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`Journal App listening on port ${port}`);
 });
 
