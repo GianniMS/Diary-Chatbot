@@ -22,7 +22,7 @@ const model = new ChatOpenAI({
     azureOpenAIApiDeploymentName: process.env.ENGINE_NAME,
 });
 
-// State the current weather conditions and store it in currentWeather to pass it to the prompt
+// Initiate weather condition variables
 let locationName = '';
 let currentWeather = '';
 
@@ -45,6 +45,7 @@ app.get('/', (req, res) => {
     res.send("Journal App using OpenAI API and OpenWeather API to summarize the journal entry")
 })
 
+// Endpoint to handle POST request to '/location'
 app.post('/location', async (req, res) => {
     try {
         // Get the location from the request body
@@ -83,6 +84,9 @@ app.post('/chat', async (req, res) => {
 
         // Send the response to the client side
         res.json({response: response.content});
+
+        // Clear location name after entry
+        locationName = '';
     } catch (error) {
         console.error("Error fetching response:", error);
         res.status(500).json({error: "Error fetching response"});

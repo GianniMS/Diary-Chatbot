@@ -90,6 +90,7 @@ async function handleSubmit(event) {
 
     // AI Usecase
     document.querySelector('.entry-input').value = '';
+    document.querySelector('.location-input').value = '';
 }
 
 document.querySelector('.location-form').addEventListener('submit', handleSubmitLocation);
