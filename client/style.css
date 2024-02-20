@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-.table {
+.fullscreen {
     width: 100vw;
     height: 100vh;
     background: linear-gradient(135deg, #FCFCFD, #E8ECEF);
@@ -146,6 +146,7 @@
 
 .history-list {
     display: flex;
+    /*column-reverse to display journal content in the right order*/
     flex-direction: column-reverse;
 }
 

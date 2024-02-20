@@ -1,6 +1,6 @@
-// Load the history from localStorage when the page loads
+// Load the history from local storage when the page loads
 let entryHistory = JSON.parse(localStorage.getItem('entryHistory')) || [];
-// declare Journal-UI buttons
+// Declare Journal-UI buttons
 const undoButton = document.querySelector(`.undo-button`);
 const deleteButton = document.querySelector(`.delete-button`);
 
@@ -54,7 +54,7 @@ async function handleSubmit(event) {
 
         entryHistory.push(responseData.response);
 
-        // Limit the history length to 31
+        // Limit the history length to 31 entries
         if (entryHistory.length > 31) {
             entryHistory.shift();
         }
