@@ -1,5 +1,6 @@
 import express from "express";
-import { ChatOpenAI } from "@langchain/openai";
+import {ChatOpenAI} from "@langchain/openai";
+import {OpenWeatherAPI} from "openweather-api-node";
 import cors from "cors";
 import bodyParser from "body-parser";
 // nodemon --env-file=.env server.js
@@ -7,9 +8,10 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 3000;
 
-app.use( bodyParser.json() );
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true}));
+    extended: true
+}));
 app.use(cors());
 
 const model = new ChatOpenAI({
@@ -17,6 +19,20 @@ const model = new ChatOpenAI({
     azureOpenAIApiVersion: process.env.OPENAI_API_VERSION,
     azureOpenAIApiInstanceName: process.env.INSTANCE_NAME,
     azureOpenAIApiDeploymentName: process.env.ENGINE_NAME,
+});
+
+// State the current weather conditions and store it in currentWeather to pass it to the prompt
+let locationName = "Rotterdam";
+let weather = new OpenWeatherAPI({
+    key: process.env.OPENWEATHER_API_KEY,
+    locationName: locationName,
+    units: "imperial"
+});
+
+let currentWeather;
+weather.getCurrent().then(data => {
+    currentWeather = `Current weather in ${locationName} is: ${data.weather.description}`;
+    console.log(currentWeather);
 });
 
 // State the current date to pass it to the prompt
@@ -34,7 +50,7 @@ const currentDate = dd + '/' + mm + '/' + yyyy;
 app.use(express.json());
 
 // Check if the server is live
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     res.send("Journal App using OpenAI API to summarize the journal entry")
 })
 
@@ -45,7 +61,8 @@ app.post('/chat', async (req, res) => {
         // Get the journal entry from the request body
         const journalEntry = req.body.query;
         // Summarize the entry by using ${userQuery} ${formattedToday}
-        let engineeredPrompt = `Summarize the following journal entry as short as you can in the I-person: ${journalEntry}. Start of by stating: "${currentDate}:"`
+        let engineeredPrompt = `Summarize the following journal entry as short as you can in the I-person: ${journalEntry}. 
+        Start of by stating: "${currentDate}:". Make a comment about the weather and location using the following info: "${currentWeather}"`
         // Invoke the model with the engineered prompt
         const response = await model.invoke(engineeredPrompt, {
             // Make it extra short
@@ -53,13 +70,14 @@ app.post('/chat', async (req, res) => {
         });
 
         // Send the response to the client side
-        res.json({ response: response.content });
+        res.json({response: response.content});
     } catch (error) {
         console.error("Error fetching response:", error);
-        res.status(500).json({ error: "Error fetching response" });
+        res.status(500).json({error: "Error fetching response"});
     }
 });
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
+
