@@ -28,7 +28,7 @@
 
 .container {
     display: flex;
-    width: 60vw;
+    width: 80vw;
     justify-content: space-around;
 }
 
@@ -212,4 +212,33 @@
     background-color: #424769;
     border-radius: 50px;
     padding: 3px;
+}
+
+.chat-history {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 18vw;
+    height: 50vh;
+    border-radius: 15px;
+    background-color: #424769;
+    padding-left: 10px;
+    padding-top: 5px;
+    resize: none;
+    font-size: 1.2vw;
+    font-family: "Outfit", sans-serif;
+}
+
+.chat-history::-webkit-scrollbar-track {
+    display: none;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 15px;
+}
+
+.chat-history::-webkit-scrollbar {
+    width: 8px;
+    background-color: #E8ECEF;
+    border-radius: 15px;
 }
