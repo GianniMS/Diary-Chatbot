@@ -1,8 +1,12 @@
 // Load the history from local storage when the page loads
 let entryHistory = JSON.parse(localStorage.getItem('entryHistory')) || [];
+// Load the history from local storage when the page loads
+let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+
 // Declare Journal-UI buttons
 const undoButton = document.querySelector(`.undo-button`);
 const deleteButton = document.querySelector(`.delete-button`);
+const deleteChatButton = document.querySelector(`.delete-chat-button`);
 
 undoButton.addEventListener("click", function (event) {
     // Undo last entry
@@ -14,8 +18,15 @@ undoButton.addEventListener("click", function (event) {
 deleteButton.addEventListener("click", function (event) {
     // Clear all entries
     entryHistory = [];
-    // Update the displayed history
+    // Update the displayed journal history
     historyDisplay();
+});
+
+deleteChatButton.addEventListener("click", function (event) {
+    // Clear chat history
+    chatHistory = [];
+    // Update the displayed chat history
+    chatHistoryDisplay();
 });
 
 function historyDisplay() {
@@ -33,6 +44,16 @@ function historyDisplay() {
         }
     });
 }
+
+function chatHistoryDisplay() {
+    const chatHistoryElement = document.querySelector('.chat-history');
+    chatHistoryElement.value = '';
+
+    chatHistory.forEach((message) => {
+        chatHistoryElement.value += `${message.senderRole}: ${message.content}\n`;
+    });
+}
+
 
 async function handleSubmitLocation(event) {
     event.preventDefault();
@@ -71,6 +92,9 @@ async function handleSubmit(event) {
         });
         const responseData = await response.json();
 
+        // Add request and response to journal- and chat history
+        chatHistory.push({content: userInput, senderRole: 'User'});
+        chatHistory.push({content: responseData.response, senderRole: 'Server'});
         entryHistory.push(responseData.response);
 
         // Limit the history length to 31 entries
@@ -78,8 +102,10 @@ async function handleSubmit(event) {
             entryHistory.shift();
         }
 
+        localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
         localStorage.setItem('entryHistory', JSON.stringify(entryHistory));
 
+        chatHistoryDisplay();
         historyDisplay();
     } catch (error) {
         console.error("Error fetching response:", error);
@@ -88,7 +114,7 @@ async function handleSubmit(event) {
         loadingSpinner.style.display = 'none';
     }
 
-    // AI Usecase
+    // AI Usecase empty textarea
     document.querySelector('.entry-input').value = '';
     document.querySelector('.location-input').value = '';
 }
@@ -96,5 +122,6 @@ async function handleSubmit(event) {
 document.querySelector('.location-form').addEventListener('submit', handleSubmitLocation);
 document.querySelector('.entry-form').addEventListener('submit', handleSubmit);
 
-// Call historyDisplay to display the history when the page loads
+// Call display functions to display journal- and chat history on load of the page
 historyDisplay();
+chatHistoryDisplay();

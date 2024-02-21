@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 
+// Initialize OpenAI API
 const model = new ChatOpenAI({
     azureOpenAIApiKey: process.env.AZURE_OPENAI_API_KEY,
     azureOpenAIApiVersion: process.env.OPENAI_API_VERSION,
@@ -69,29 +70,36 @@ app.post('/location', async (req, res) => {
     }
 });
 
+// Function to summarize journal entry
+async function summarizeJournalEntry(journalEntry) {
+    // Summarize the entry by using ${userQuery} ${formattedToday}
+    let engineeredPrompt = `Summarize the following journal entry as short as you can in the I-person: ${journalEntry}. 
+        Start of by stating: "${currentDate}:". Make a comment about the weather and location using the following info: "${currentWeather}"`;
+
+    // Invoke the model with the engineered prompt
+    const response = await model.invoke(engineeredPrompt, {
+        // Make it extra short
+        max_tokens: 15,
+    });
+
+    return response.content;
+}
+
+
 // Endpoint to handle POST requests to '/chat'
-// AI Usecase excluding prompt engineering
+// AI Usecase handle post request serverside
 app.post('/chat', async (req, res) => {
     try {
         // Get the journal entry from the request body
         const journalEntry = req.body.query;
-        // Summarize the entry by using ${userQuery} ${formattedToday}
-        let engineeredPrompt = `Summarize the following journal entry as short as you can in the I-person: ${journalEntry}. 
-        Start of by stating: "${currentDate}:". Make a comment about the weather and location using the following info: "${currentWeather}"`
-        // Invoke the model with the engineered prompt
-        const response = await model.invoke(engineeredPrompt, {
-            // Make it extra short
-            max_tokens: 15,
-        });
+        // Execute function to summarize journal entry
+        const response = await summarizeJournalEntry(journalEntry);
 
-        // Send the response to the client side
-        res.json({response: response.content});
-
-        // Clear location name after entry
-        locationName = '';
+        // Send the response with the chat roles
+        res.json({response, senderRole: 'OpenAI API'});
     } catch (error) {
-        console.error("Error fetching response:", error);
-        res.status(500).json({error: "Error fetching response"});
+        console.error('Error fetching response:', error);
+        res.status(500).json({error: 'Error fetching response'});
     }
 });
 
