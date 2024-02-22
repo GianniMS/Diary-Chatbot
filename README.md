@@ -20,8 +20,8 @@ OPENAI_API_VERSION=________ <br>
 OPENAI_API_BASE=________ <br>
 AZURE_OPENAI_API_KEY=_____________________________ <br>
 OPENWEATHER_API_KEY=_____________________________ <br>
-DEPLOYMENT_NAME=deploy-text-embedding-ada
-ENGINE_NAME=deploy-gpt-35-turbo
+DEPLOYMENT_NAME=deploy-text-embedding-ada <br>
+ENGINE_NAME=deploy-gpt-35-turbo <br>
 INSTANCE_NAME=________ <br>
 
 Usage:
