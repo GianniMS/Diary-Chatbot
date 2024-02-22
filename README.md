@@ -1,5 +1,5 @@
 # Journal App
-<br>
+
 ## Installation: <br>
 ### Step 1: <br>
 Open the terminal in your code editor and clone the repository by using the following command:
