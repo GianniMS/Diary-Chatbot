@@ -2,7 +2,7 @@
 
 ## Installation: <br>
 ### Step 1: <br>
-Open the terminal in your code editor and clone the repository by using the following command:
+Open the terminal in your code editor and clone the repository by using the following command: <br>
 **git clone https://github.com/GianniMS/Diary-Chatbot**
 
 ### Step 2: <br>
