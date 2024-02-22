@@ -2,13 +2,13 @@ Installation:
 1: Open the terminal in your code editor and clone the repository by using the following command:
 git clone https://github.com/GianniMS/Diary-Chatbot
 
-2: Navigate to the projects directory using the following terminal command:
+2: Navigate to the projects directory using the following terminal command: <br>
 cd Diary-Chatbot
 
-3: Now navigate to the server directory using the following terminal command:
+3: Now navigate to the server directory using the following terminal command: <br>
 cd server
 
-4: Now install the dependencies using the following terminal command:
+4: Now install the dependencies using the following terminal command: <br>
 npm install
 
 Configuration:
