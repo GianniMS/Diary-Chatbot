@@ -13,25 +13,25 @@ npm install
 
 Configuration:
 1: Configure the environment variables in your .env file, you'll need an OpenAI API key and an OpenWeather API key. And you'll need to enter the OpenAI API type, the OpenAI API version and the OpenAI API base. 
-The deployment name and engin
-Template:
-OPENAI_API_TYPE=____
-OPENAI_API_VERSION=_______
-OPENAI_API_BASE=________
-AZURE_OPENAI_API_KEY=____________________________
-OPENWEATHER_API_KEY=_____________________________
+The deployment name and engine are set already, you'll also need to fill in the instance name. <br>
+Template: <br> 
+OPENAI_API_TYPE________ <br>
+OPENAI_API_VERSION=________ <br>
+OPENAI_API_BASE=________ <br>
+AZURE_OPENAI_API_KEY=_____________________________ <br>
+OPENWEATHER_API_KEY=_____________________________ <br>
 DEPLOYMENT_NAME=deploy-text-embedding-ada
 ENGINE_NAME=deploy-gpt-35-turbo
-INSTANCE_NAME=_______
+INSTANCE_NAME=________ <br>
 
 Usage:
-1: Start the server using the following terminal command (Make sure your in the server directory before executing the command):
+1: Start the server using the following terminal command (Make sure your in the server directory before executing the command): <br>
  nodemon --env-file=.env server.js
 
 The terminal should now display that the server is running. Error cd server thingy
 
-2: Open your webbrowser and navigate to http://localhost:3000
-It should display:
+2: Open your webbrowser and navigate to http://localhost:3000 <br>
+It should display: <br>
 Journal App using OpenAI API and OpenWeather API to summarize the journal entry
 
 3: Serve the index.html file, one way to do this is to navigate to the index.html file from inside your files and then open it in the browser by double clicking it
