@@ -22,7 +22,7 @@ Now install the dependencies using the following terminal command: <br>
 Configure the environment variables in your **.env file**, you'll need an OpenAI API key and an OpenWeather API key. And you'll need to enter the OpenAI API type, the OpenAI API version and the OpenAI API base. 
 The deployment name and engine are set already, you'll also need to fill in the instance name. <br>
 Template: <br> 
-OPENAI_API_TYPE________ <br>
+OPENAI_API_TYPE=________ <br>
 OPENAI_API_VERSION=________ <br>
 OPENAI_API_BASE=________ <br>
 AZURE_OPENAI_API_KEY=_____________________________ <br>
