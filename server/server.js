@@ -23,6 +23,9 @@ const model = new ChatOpenAI({
     azureOpenAIApiDeploymentName: process.env.ENGINE_NAME,
 });
 
+// Initiate previous entry
+let previousEntry = ``;
+
 // Initiate weather condition variables
 let locationName = '';
 let currentWeather = '';
@@ -71,10 +74,15 @@ app.post('/location', async (req, res) => {
 });
 
 // Function to summarize journal entry
-async function summarizeJournalEntry(journalEntry) {
-    // Summarize the entry by using ${userQuery} ${formattedToday}
-    let engineeredPrompt = `Summarize the following journal entry as short as you can in the I-person: ${journalEntry}. 
-        Start of by stating: "${currentDate}:". Make a comment about the weather and location using the following info: "${currentWeather}"`;
+async function summarizeJournalEntry(journalEntry, previousEntry) {
+    // Summarize the entry by using ${userQuery} ${currentDate} ${currentWeather} and ${chatContext}
+    let engineeredPrompt = `Summarize the following journal entry as short as you can in the I-person: ${journalEntry}.
+        Start of by stating: "${currentDate}:". Make a comment about the weather and location using the following info: "${currentWeather}".`;
+
+    // Add previous entry context if available
+    if (previousEntry) {
+        engineeredPrompt += `This is what I did yesterday, use this for context: "${previousEntry}".`;
+    }
 
     // Invoke the model with the engineered prompt
     const response = await model.invoke(engineeredPrompt, {
@@ -85,15 +93,18 @@ async function summarizeJournalEntry(journalEntry) {
     return response.content;
 }
 
-
 // Endpoint to handle POST requests to '/chat'
 // AI Usecase handle post request serverside
 app.post('/chat', async (req, res) => {
     try {
         // Get the journal entry from the request body
         const journalEntry = req.body.query;
+
         // Execute function to summarize journal entry
-        const response = await summarizeJournalEntry(journalEntry);
+        const response = await summarizeJournalEntry(journalEntry, previousEntry);
+
+        // Update previous entry for next use
+        previousEntry = journalEntry;
 
         // Send the response with the chat roles
         res.json({response, senderRole: 'OpenAI API'});

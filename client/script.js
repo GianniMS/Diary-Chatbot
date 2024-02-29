@@ -54,7 +54,6 @@ function chatHistoryDisplay() {
     });
 }
 
-
 async function handleSubmitLocation(event) {
     event.preventDefault();
 
@@ -94,7 +93,7 @@ async function handleSubmit(event) {
 
         // Add request and response to journal- and chat history
         chatHistory.push({content: userInput, senderRole: 'User'});
-        chatHistory.push({content: responseData.response, senderRole: 'Server'});
+        chatHistory.push({content: responseData.response, senderRole: 'OpenAI API'});
         entryHistory.push(responseData.response);
 
         // Limit the history length to 31 entries
