@@ -115,6 +115,8 @@ async function handleSubmit(event) {
 
         chatHistoryDisplay();
         historyDisplay();
+        scrollToBottom();
+
     } catch (error) {
         console.error("Error fetching response:", error);
     } finally {
