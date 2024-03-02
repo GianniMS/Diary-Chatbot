@@ -34,7 +34,7 @@ INSTANCE_NAME=________ <br>
 ## Usage: <br>
 ### Step 1: <br>
 Start the server using the following terminal command (Make sure your in the server directory before executing the command): <br>
-**nodemon --env-file=.env server.js**
+**npm start**
 
 The terminal should now display:
 _Journal App listening on port 3000_
@@ -65,7 +65,8 @@ Press the button on the right of the location input field with the GPS icon. <br
 This will send the name of the location to the server so the weather data can be retrieved, from the OpenWeather API, before summarizing the journal entry.
 
 ### Step 3: <br>
-Enter a detailed description of your day and your emotions during the day in the **input field** that says: _"Write a journal entry..."_ <br>
+Enter a detailed description of your day and your emotions during the day in the **input field** that says: _"Write a journal entry..."_. <br>
+The OpenAI API has access to the context of your last 31 journal entries, you can refer to these entries as you wish.
 
 ### Step 4: <br>
 Press the send button below the journal entry input field with the upload icon. <br>
@@ -84,7 +85,7 @@ The clear button will remove **all submitted entries** from the journal. It is t
 
 ## Chat History
 ### Reading the chat history: <br>
-The chat history displays the chat interactions between the user and the server. The roles of the sender of each message is stated at the start of the message.
+The chat history displays the chat interactions between the user and the OpenAI API. The roles of the sender of each message is stated at the start of the message. Scrolling up in the display allows you to see older messages from the chat history
 
 ### UI buttons: <br>
 **The clear button: <br>**
