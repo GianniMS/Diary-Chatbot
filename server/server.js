@@ -1,6 +1,6 @@
 import express from "express";
-import {ChatOpenAI} from "@langchain/openai";
-import {OpenWeatherAPI} from "openweather-api-node";
+import { ChatOpenAI } from "@langchain/openai";
+import { OpenWeatherAPI } from "openweather-api-node";
 import cors from "cors";
 import bodyParser from "body-parser";
 
@@ -23,8 +23,8 @@ const model = new ChatOpenAI({
     azureOpenAIApiDeploymentName: process.env.ENGINE_NAME,
 });
 
-// Initiate previous entry
-let previousEntry = ``;
+// Initiate journal entries array
+let journalEntries = [];
 
 // Initiate weather condition variables
 let locationName = '';
@@ -74,15 +74,17 @@ app.post('/location', async (req, res) => {
 });
 
 // Function to summarize journal entry
-async function summarizeJournalEntry(journalEntry, previousEntry) {
+async function summarizeJournalEntry(journalEntry) {
+    // Add previous entries as context
+    let context = '';
+    for (let entry of journalEntries) {
+        context += ` ${entry}`;
+    }
+
     // Summarize the entry by using ${userQuery} ${currentDate} ${currentWeather} and ${chatContext}
     let engineeredPrompt = `Summarize the following journal entry as short as you can in the I-person: ${journalEntry}.
-        Start of by stating: "${currentDate}:". Make a comment about the weather and location using the following info: "${currentWeather}".`;
-
-    // Add previous entry context if available
-    if (previousEntry) {
-        engineeredPrompt += `This is what I did yesterday, use this for context: "${previousEntry}".`;
-    }
+        Start of by stating: "${currentDate}:". Make a comment about the weather and location using the following info: "${currentWeather}".
+        If the entry contains a reference to a previous day use this as context: ${context}`;
 
     // Invoke the model with the engineered prompt
     const response = await model.invoke(engineeredPrompt, {
@@ -101,16 +103,21 @@ app.post('/chat', async (req, res) => {
         const journalEntry = req.body.query;
 
         // Execute function to summarize journal entry
-        const response = await summarizeJournalEntry(journalEntry, previousEntry);
+        const response = await summarizeJournalEntry(journalEntry);
 
-        // Update previous entry for next use
-        previousEntry = journalEntry;
+        // Add summarized entry to journal entries array
+        journalEntries.push(response);
+
+        // Limit the journal entries array to 31 items
+        if (journalEntries.length > 31) {
+            journalEntries.shift(); // Remove the oldest entry
+        }
 
         // Send the response with the chat roles
-        res.json({response, senderRole: 'OpenAI API'});
+        res.json({ response, senderRole: 'OpenAI API' });
     } catch (error) {
         console.error('Error fetching response:', error);
-        res.status(500).json({error: 'Error fetching response'});
+        res.status(500).json({ error: 'Error fetching response' });
     }
 });
 
