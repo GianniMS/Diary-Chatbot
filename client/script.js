@@ -3,6 +3,15 @@ let entryHistory = JSON.parse(localStorage.getItem('entryHistory')) || [];
 // Load the history from local storage when the page loads
 let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
 
+function scrollToBottom() {
+    let textarea = document.getElementById("chat-history");
+    textarea.scrollTop = textarea.scrollHeight;
+};
+
+window.onload = function() {
+    scrollToBottom();
+};
+
 // Declare Journal-UI buttons
 const undoButton = document.querySelector(`.undo-button`);
 const deleteButton = document.querySelector(`.delete-button`);
